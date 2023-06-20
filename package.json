@@ -3,15 +3,15 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/mvbrazas"
   },
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "React native components library",
   "scripts": {
     "rollup": "rollup -c",
     "update-stories": "sb-rn-get-stories --config-path .ondevice",
     "prestart": "yarn update-stories",
     "storybook-watcher": "sb-rn-watcher --config-path .ondevice",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "main": "dist/bundle.js",
   "files": [
@@ -21,30 +21,29 @@
   "license": "ISC",
   "dependencies": {
     "react-dom": "^18.2.0",
+    "react-native-safe-area-context": "^4.4.1",
     "react-native-web": "^0.18.10"
   },
   "devDependencies": {
     "@babel/core": "^7.22.5",
     "@babel/preset-env": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
-    "@storybook/addon-actions": "^6.5.14",
-    "@storybook/addon-controls": "^6.5.14",
-    "@storybook/addon-essentials": "^6.5.14",
-    "@storybook/addon-links": "^6.5.14",
-    "@storybook/addon-ondevice-actions": "^6.5.1",
-    "@storybook/addon-ondevice-backgrounds": "^6.5.1",
-    "@storybook/addon-ondevice-controls": "^6.5.1",
-    "@storybook/addon-ondevice-notes": "^6.5.1",
-    "@storybook/addon-react-native-web": "^0.0.19",
-    "@storybook/builder-webpack5": "^6.5.16",
-    "@storybook/manager-webpack5": "^6.5.16",
-    "@storybook/react-native": "^6.5.1",
-    "@storybook/react": "^6.5.14",
-    "@storybook/testing-library": "^0.0.13",
+    "@storybook/addon-actions": "^7.0.22",
+    "@storybook/addon-controls": "^7.0.22",
+    "@storybook/addon-essentials": "^7.0.22",
+    "@storybook/addon-links": "^7.0.22",
+    "@storybook/addon-ondevice-backgrounds": "^6.5.3",
+    "@storybook/addon-ondevice-notes": "^6.5.3",
+    "@storybook/addon-react-native-web": "^0.0.20",
+    "@storybook/react": "^7.0.22",
+    "@storybook/react-native": "^6.5.3",
+    "@storybook/react-webpack5": "^7.0.22",
+    "@storybook/testing-library": "^0.1.0",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-native": "^0.71.11",
     "rollup": "^2.79.1",
+    "storybook": "^7.0.22",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-resolve": "^5.2.0"
