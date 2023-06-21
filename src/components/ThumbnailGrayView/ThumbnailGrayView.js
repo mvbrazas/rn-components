@@ -4,16 +4,65 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import HybridImage from '../HybridImage';
 
 const ThumbnailGrayView = (props) => {
-    const {thumbnail, defaultSource, title, summary, date, onPress} = props;
+    const {
+        defaultSource,
+        source,
+        backgroundColor,
+        sourceSize,
+        textColor,
+        textSize,
+        height,
+        width,
+        summary,
+        title,
+        date,
+        onPress
+    } = props;
     const sinceDate = moment(new Date(date)).fromNow();
     return (
         <TouchableOpacity onPress={onPress}>
-            <View style={styles.view}>
-                <HybridImage style={styles.thumbnail} source={thumbnail} defaultSource={defaultSource} />
+            <View 
+                style={[
+                    styles.view,
+                    backgroundColor && {backgroundColor: backgroundColor},
+                    height && {height: height},
+                    width && {width: width}
+                ]}>
+                <HybridImage 
+                    style={[
+                        styles.thumbnail,
+                        sourceSize && {height: sourceSize, width: sourceSize}
+                    ]}
+                    defaultSource={defaultSource}
+                    source={source} />
                 <View style={styles.textView}>
-                    <Text numberOfLines={2} style={styles.title}>{title}</Text>
-                    <Text numberOfLines={3} style={styles.description}>{summary}</Text>
-                    <Text numberOfLines={1} style={styles.date}>{sinceDate}</Text>
+                    <Text
+                        style={[
+                            styles.title,
+                            textColor && {color: textColor},
+                            textSize && {fontSize: textSize}
+                        ]}
+                        numberOfLines={2}>
+                            {title}
+                    </Text>
+                    <Text 
+                        style={[
+                            styles.description,
+                            textColor && {color: textColor},
+                            textSize && {fontSize: textSize-1}
+                        ]} 
+                        numberOfLines={3}>
+                            {summary}
+                    </Text>
+                    <Text 
+                        style={[
+                            styles.date,
+                            textColor && {color: textColor},
+                            textSize && {fontSize: textSize-2}
+                        ]} 
+                        numberOfLines={1}>
+                            {sinceDate}
+                    </Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -33,9 +82,9 @@ const styles = StyleSheet.create({
         margin: 5
     },
     thumbnail: {
-      borderRadius: 10,
-      height: 70,
-      width: 70
+        borderRadius: 10,
+        height: 70,
+        width: 70
     },
     textView: {
         marginHorizontal: 10,

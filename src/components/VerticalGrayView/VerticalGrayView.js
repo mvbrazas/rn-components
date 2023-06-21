@@ -3,14 +3,52 @@ import moment from 'moment';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import HybridImage from "../HybridImage";
 
-const VerticalGrayView = ({thumbnail, defaultSource, title, date}) => {
+const VerticalGrayView = (props) => {
+    const {
+        sourcewidth,
+        sourceHeight,
+        textViewWidth,
+        textViewHeight,
+        defaultSource,
+        source,
+        backgroundColor,
+        textColor,
+        textSize,
+        title,
+        date
+    } = props;
     const sinceDate = moment(new Date(date)).fromNow();
     return (
         <TouchableOpacity>
-            <HybridImage style={styles.thumbnail} source={thumbnail} defaultSource={defaultSource} />
-            <View style={styles.textView}>
-                <Text numberOfLines={2} style={styles.title}>{title}</Text>
-                <Text numberOfLines={1} style={styles.date}>{sinceDate}</Text>
+            <HybridImage 
+                style={[
+                    styles.thumbnail,
+                    sourcewidth && {width: sourcewidth},
+                    sourceHeight && {height: sourceHeight},
+                ]} 
+                defaultSource={defaultSource} 
+                source={source} />
+            <View 
+                style={[
+                    styles.textView,
+                    textViewWidth && {width: textViewWidth},
+                    textViewHeight && {height: textViewHeight},
+                    backgroundColor && {backgroundColor: backgroundColor},
+                ]}>
+                <Text 
+                    style={[
+                        styles.title,
+                        textSize && {fontSize: textSize},
+                        textColor && {color: textColor},
+                    ]} 
+                    numberOfLines={2}>{title}</Text>
+                <Text 
+                    style={[
+                        styles.date,
+                        textSize && {fontSize: textSize-2},
+                        textColor && {color: textColor},
+                    ]} 
+                    numberOfLines={1}>{sinceDate}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -38,11 +76,6 @@ const styles = StyleSheet.create({
     title: {
         marginBottom: 5,
         fontSize: 13,
-        color: '#000000'
-    },
-    description: {
-        marginBottom: 5,
-        fontSize: 12,
         color: '#000000'
     },
     date: {

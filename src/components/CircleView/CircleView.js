@@ -2,11 +2,36 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import HybridImage from '../HybridImage';
 
-const CircleView = ({thumbnail, defaultSource, title}) => {
+const CircleView = (props) => {
+    const {
+        defaultSource,
+        textColor,
+        onPress,
+        source,
+        text,
+        size
+    } = props;
     return (
-        <TouchableOpacity style={styles.view}>
-            <HybridImage style={styles.cirlcleImage} source={thumbnail} defaultSource={defaultSource} />
-            <Text style={styles.title} numberOfLines={1}>{title}</Text>
+        <TouchableOpacity style={[
+                styles.view,
+                size && {width: size}
+            ]}
+            onPress={onPress}>
+            <HybridImage 
+                style={[
+                    styles.cirlcleImage,
+                    size && {height: size}
+                ]} 
+                defaultSource={defaultSource}
+                source={source} />
+            <Text 
+                style={[
+                    styles.title, 
+                    textColor && {color: textColor}
+                ]} 
+                numberOfLines={1}>
+                    {text}
+            </Text>
         </TouchableOpacity>
     );
 }
