@@ -3,7 +3,10 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/mvbrazas"
   },
-  "version": "0.1.0",
+  "repository": {
+    "url": "git@github.com:mvbrazas/rn-components.git"
+  },
+  "version": "0.1.1",
   "description": "React native components library",
   "scripts": {
     "test": "jest",
