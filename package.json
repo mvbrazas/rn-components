@@ -6,7 +6,7 @@
   "repository": {
     "url": "git@github.com:mvbrazas/rn-components.git"
   },
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React native components library",
   "scripts": {
     "test": "jest",
