@@ -60,6 +60,27 @@ const showSample = [
     }
 ]
 
+const pushSample = [
+    {
+        source: "https://ent-image-api.abs-cbn.com/Prod/20230623090624/5b8faac5fb4311b564feb91ded7f40a6ad592a023b0cb97cc1bde71d36415d46.jpg", 
+        title: "Did you know? Kris Aquino once tried to bring Taylor Swift concert to PH",
+        date: "Fri, 23 Jun 2023 08:49:40 GMT",
+        id: "1",
+    },
+    {
+        source: "https://ent-image-api.abs-cbn.com/Prod/20230623060624/eda1ade60ee69b5f4b4f8e81ed9dec53113343ba386a59e3db6b0c14de59b758.jpg", 
+        title: "Lie Detector Challenge with Majoy Apostol and Jomari Angeles | PUSH TV",
+        date: "",
+        id: "",
+    },
+    {
+        source: "https://ent-image-api.abs-cbn.com/Prod/20230623030612/d3a7ef61a6ae8246e265d6a481cff537e595833ce9ed7c95c95c01e5306bca64.jpg", 
+        title: "Super Junior invites Filipino fans to their upcoming fan party this July",
+        date: "Fri, 23 Jun 2023 05:34:36 GMT",
+        id: "Fri, 23 Jun 2023 02:16:51 GMT",
+    }
+]
+
 export default {
     title: "components/HorizontalListView",
     component: HorizontalListView,
@@ -71,6 +92,10 @@ export default {
         }
     },
     argTypes: {
+        isPriority: {
+            description: "Is item featured?",
+            defaultValue: { summary: "bool" }
+        },
         title: {
             control: "select",
             options: ["LIVE!", "LATEST PODCAST EPISODES", "LATEST PODCAST SHOWS"],
@@ -79,7 +104,7 @@ export default {
         },
         type: {
             control: "select",
-            options: ["Circle", "Detail", "Thumbnail"],
+            options: ["Circle", "Detail", "Thumbnail", "ThumbnailDetail"],
             description: "Type of the list",
             defaultValue: { summary: "string" }
         },
@@ -172,6 +197,7 @@ const Basic = {
         titleColor: "#FF6232",
         backgroundColor: "#c3c3c3",
         title: "LATEST PODCAST EPISODES",
+        isPriority: false,
         items: episdoeSample,
     },
     parameters: {
@@ -190,6 +216,7 @@ const Circle = {
         textColor: "#000",
         titleColor: "#FF6232",
         title: "LIVE!",
+        isPriority: false,
         items: livestreamSample,
     },
     parameters: {
@@ -208,6 +235,7 @@ const Thumbnail = {
         textColor: "#000",
         titleColor: "#FF6232",
         title: "LATEST PODCAST SHOWS",
+        isPriority: false,
         items: showSample,
     },
     parameters: {
@@ -219,4 +247,23 @@ const Thumbnail = {
     }
 };
 
-export { Basic, Circle, Thumbnail };
+const ThumbnailDetail = {
+    args: {
+        type: "ThumbnailDetail",
+        textSize: 13,
+        textColor: "#000",
+        titleColor: "#FF6232",
+        title: "PUSH",
+        isPriority: true,
+        items: pushSample,
+    },
+    parameters: {
+        docs: {
+            description: {
+                story: "ThumbnailDetail type displays a list of items with a thumbnail, title, and date."
+            }
+        }
+    }
+};
+
+export { Basic, Circle, Thumbnail, ThumbnailDetail };

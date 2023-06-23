@@ -1,6 +1,7 @@
 import React from "react";
-import { FlatList, StyleSheet, Text } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import ThumbnailGrayView from "../ThumbnailGrayView";
+import VerticalGrayView from "../VerticalGrayView";
 import ThumbnailView from "../ThumbnailView";
 import CircleView from "../CircleView";
 
@@ -8,6 +9,7 @@ export interface HorizontalListView {
     onPress?: (item: any) => void;
     defaultSource?: any;
     backgroundColor?: string;
+    isPriority?: boolean;
     sourceSize?: number;
     titleColor?: string;
     titleSize?: number;
@@ -23,6 +25,7 @@ export interface HorizontalListView {
 const HorizontalListView = ({
         defaultSource,
         backgroundColor,
+        isPriority,
         sourceSize,
         titleColor,
         titleSize,
@@ -42,14 +45,18 @@ const HorizontalListView = ({
     };
     return (
         <>
-            <Text 
-                style={[
-                    styles.title,
-                    titleColor != undefined && {color: titleColor},
-                    titleSize != undefined && {fontSize: titleSize},
-                ]}>
-                    {title}
-            </Text>
+            <View style={styles.titleView}>
+                <Text style={[
+                        styles.title,
+                        titleColor != undefined && {color: titleColor},
+                        titleSize != undefined && {fontSize: titleSize},
+                    ]}>
+                        {title}
+                </Text>
+                {isPriority && <View style={styles.featuredView}>
+                    <Text style={styles.featuredTitle}>FEATURED</Text>
+                </View>}
+            </View>
             <FlatList
                 horizontal
                 data={items}
@@ -100,6 +107,22 @@ const HorizontalListView = ({
                                 onPress={() => itemPress(item)}
                             />
                         );
+                    } else if (type == "ThumbnailDetail") {
+                        return (
+                            <VerticalGrayView
+                                sourceHeight={itemHeight}
+                                sourcewidth={itemWidth}
+                                defaultSource={defaultSource} 
+                                backgroundColor={backgroundColor}
+                                textColor={textColor}
+                                textSize={textSize}
+                                source={source} 
+                                title={title} 
+                                date={date} 
+                                key={id} 
+                                onPress={() => itemPress(item)}
+                            />
+                        );
                     }
                     return <Text>Invalid Type</Text>;
                 }}
@@ -111,6 +134,9 @@ const HorizontalListView = ({
 export default HorizontalListView;
 
 const styles = StyleSheet.create({
+    titleView: {
+        flexDirection: 'row'
+    },
     title: {
         fontSize: 16,
         marginTop: 10,
@@ -120,5 +146,19 @@ const styles = StyleSheet.create({
     },
     list: {
         marginTop: 5,
+    },
+    featuredView: {
+        marginTop: 10,
+        marginLeft: 10,
+        borderRadius: 10,
+        paddingVertical: 0,
+        paddingHorizontal: 7.5,
+        backgroundColor: '#FF6232',
+        alignSelf: 'center'
+    },
+    featuredTitle: {
+        margin: 0,
+        padding: 0,
+        color: '#FFFFFF'
     }
 });
