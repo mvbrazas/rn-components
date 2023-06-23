@@ -2,19 +2,27 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import HybridImage from '../HybridImage';
 
-const CircleView = (props) => {
-    const {
+export interface CircleViewProps {
+    onPress?: () => void;
+    defaultSource?: any;
+    textColor?: string;
+    source: string;
+    text: string;
+    size?: number;
+}
+
+const CircleView = ({
         defaultSource,
         textColor,
         onPress,
         source,
         text,
         size
-    } = props;
+    }: CircleViewProps) => {
     return (
         <TouchableOpacity style={[
                 styles.view,
-                size && {width: size}
+                size != undefined && {width: size}
             ]}
             onPress={onPress}>
             <HybridImage 
@@ -27,7 +35,7 @@ const CircleView = (props) => {
             <Text 
                 style={[
                     styles.title, 
-                    textColor && {color: textColor}
+                    textColor != undefined && {color: textColor}
                 ]} 
                 numberOfLines={1}>
                     {text}

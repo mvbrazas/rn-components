@@ -3,8 +3,22 @@ import moment from 'moment';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import HybridImage from "../HybridImage";
 
-const VerticalGrayView = (props) => {
-    const {
+export interface VerticalGrayViewProps {
+    onPress?: () => void;
+    sourcewidth?: number;
+    sourceHeight?: number;
+    textViewWidth?: number;
+    textViewHeight?: number;
+    defaultSource?: any;
+    source: string;
+    backgroundColor?: string;
+    textColor?: string;
+    textSize?: number;
+    title: string;
+    date: string;
+}
+
+const VerticalGrayView = ({
         sourcewidth,
         sourceHeight,
         textViewWidth,
@@ -15,11 +29,12 @@ const VerticalGrayView = (props) => {
         textColor,
         textSize,
         title,
-        date
-    } = props;
+        date,
+        onPress
+    }: VerticalGrayViewProps) => {
     const sinceDate = moment(new Date(date)).fromNow();
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={onPress}>
             <HybridImage 
                 style={[
                     styles.thumbnail,
@@ -31,22 +46,22 @@ const VerticalGrayView = (props) => {
             <View 
                 style={[
                     styles.textView,
-                    textViewWidth && {width: textViewWidth},
-                    textViewHeight && {height: textViewHeight},
-                    backgroundColor && {backgroundColor: backgroundColor},
+                    textViewWidth != undefined && {width: textViewWidth},
+                    textViewHeight != undefined && {height: textViewHeight},
+                    backgroundColor != undefined && {backgroundColor: backgroundColor},
                 ]}>
                 <Text 
                     style={[
                         styles.title,
-                        textSize && {fontSize: textSize},
-                        textColor && {color: textColor},
+                        textSize != undefined && {fontSize: textSize},
+                        textColor != undefined && {color: textColor},
                     ]} 
                     numberOfLines={2}>{title}</Text>
                 <Text 
                     style={[
                         styles.date,
-                        textSize && {fontSize: textSize-2},
-                        textColor && {color: textColor},
+                        textSize != undefined && {fontSize: textSize-2},
+                        textColor != undefined && {color: textColor},
                     ]} 
                     numberOfLines={1}>{sinceDate}</Text>
             </View>

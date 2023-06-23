@@ -10,5 +10,7 @@ import CircleView from './CircleView';
 import renderer from 'react-test-renderer';
 
 it('renders correctly', () => {
-  renderer.create(<CircleView />);
+  const source = "https://newsapp.abs-cbnnews.com/DZMMAssets/dzmmBanner.png";
+  const text = "TeleRadyo";
+  renderer.create(<CircleView source={source} text={text} />);
 });
