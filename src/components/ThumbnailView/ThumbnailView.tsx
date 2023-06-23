@@ -3,8 +3,20 @@ import moment from 'moment';
 import { StyleSheet, TouchableOpacity, Text, Dimensions, View } from 'react-native';
 import HybridImage from "../HybridImage";
 
-const ThumbnailView = (item) => {
-    const { 
+export interface ThumbnailViewProps {
+    onPress?: () => void;
+    isPriority: boolean;
+    featuredTextColor?: string;
+    featuredBackgroundColor?: string;
+    defaultSource?: any;
+    source: string;
+    textColor?: string; 
+    textSize?: number;
+    text: string;
+    date?: string
+}
+
+const ThumbnailView = ({ 
         isPriority, 
         featuredTextColor,
         featuredBackgroundColor,
@@ -15,33 +27,33 @@ const ThumbnailView = (item) => {
         text, 
         date, 
         onPress 
-    } = item;
+    }: ThumbnailViewProps) => {
     const isDateVisible = date != undefined;
     const width = isDateVisible ? Dimensions.get('window').width/2.113 : 150;
     const sinceDate = () => {
         if (isDateVisible) {
-            const dateStyle = [
-                styles.title, {fontSize: 11}, 
-                (isDateVisible && {alignContent: 'flex-start'}),
-                textColor && {color: textColor},
-                textSize && {fontSize: textSize}
-            ];
             const momentDate = moment(new Date(date)).fromNow();
-            return <Text numberOfLines={1} style={dateStyle}>{momentDate}</Text>;
+            return <Text numberOfLines={1} style={[
+                styles.title, 
+                {fontSize: 11},
+                (isDateVisible && {alignContent: 'flex-start'}),
+                textColor != undefined && {color: textColor},
+                textSize != undefined && {fontSize: textSize}
+            ]}>{momentDate}</Text>;
         }
         return null;
     }
-    const getFeature = (isPriority) => {
+    const getFeature = (isPriority: boolean) => {
         if (isPriority) {
             return (
                 <View 
                     style={[
                         styles.viewFeatured,
-                        featuredBackgroundColor && {backgroundColor: featuredBackgroundColor}
+                        featuredBackgroundColor != undefined && {backgroundColor: featuredBackgroundColor}
                     ]}>
                     <Text style={[
                         styles.titleFeatured,
-                        featuredTextColor && {color: featuredTextColor}
+                        featuredTextColor != undefined && {color: featuredTextColor}
                         ]}>
                             Featured
                     </Text>
@@ -59,8 +71,8 @@ const ThumbnailView = (item) => {
                 style={[
                     styles.title, 
                     (isDateVisible && {alignContent: 'flex-start'}),
-                    textColor && {color: textColor},
-                    textSize && {fontSize: textSize}
+                    textColor != undefined && {color: textColor},
+                    textSize != undefined && {fontSize: textSize}
                 ]}
                 numberOfLines={1}>
                     {text}

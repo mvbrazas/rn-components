@@ -4,8 +4,23 @@ import ThumbnailGrayView from "../ThumbnailGrayView";
 import ThumbnailView from "../ThumbnailView";
 import CircleView from "../CircleView";
 
-const HorizontalListView = (props) => {
-    const {
+export interface HorizontalListView {
+    onPress?: (item: any) => void;
+    defaultSource?: any;
+    backgroundColor?: string;
+    sourceSize?: number;
+    titleColor?: string;
+    titleSize?: number;
+    textColor?: string;
+    textSize?: number;
+    itemHeight?: number;
+    itemWidth?: number;
+    title: string;
+    items: any[];
+    type: string;
+}
+
+const HorizontalListView = ({
         defaultSource,
         backgroundColor,
         sourceSize,
@@ -19,8 +34,8 @@ const HorizontalListView = (props) => {
         title, 
         items, 
         type, 
-    } = props;
-    const itemPress = (item) => {
+    }: HorizontalListView) => {
+    const itemPress = (item: any) => {
         if (onPress != null && onPress != undefined) {
             onPress(item);
         }
@@ -30,8 +45,8 @@ const HorizontalListView = (props) => {
             <Text 
                 style={[
                     styles.title,
-                    titleColor && {color: titleColor},
-                    titleSize && {fontSize: titleSize},
+                    titleColor != undefined && {color: titleColor},
+                    titleSize != undefined && {fontSize: titleSize},
                 ]}>
                     {title}
             </Text>
@@ -75,6 +90,7 @@ const HorizontalListView = (props) => {
                     } else if (type == "Thumbnail") {
                         return (
                             <ThumbnailView
+                                isPriority={false}
                                 defaultSource={defaultSource}
                                 textColor={textColor}
                                 textSize={textSize}

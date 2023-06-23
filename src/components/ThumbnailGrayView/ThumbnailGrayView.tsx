@@ -3,8 +3,22 @@ import moment from 'moment';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import HybridImage from '../HybridImage';
 
-const ThumbnailGrayView = (props) => {
-    const {
+export interface ThumbnailGrayViewProps {
+    onPress?: () => void;
+    defaultSource?: any;
+    source: string;
+    backgroundColor?: string;
+    sourceSize?: number;
+    textColor?: string;
+    textSize?: number;
+    height?: number;
+    width?: number;
+    summary: string;
+    title: string;
+    date: string;
+}
+
+const ThumbnailGrayView = ({
         defaultSource,
         source,
         backgroundColor,
@@ -17,16 +31,16 @@ const ThumbnailGrayView = (props) => {
         title,
         date,
         onPress
-    } = props;
+    }: ThumbnailGrayViewProps) => {
     const sinceDate = moment(new Date(date)).fromNow();
     return (
         <TouchableOpacity onPress={onPress}>
             <View 
                 style={[
                     styles.view,
-                    backgroundColor && {backgroundColor: backgroundColor},
-                    height && {height: height},
-                    width && {width: width}
+                    backgroundColor != undefined && {backgroundColor: backgroundColor},
+                    height != undefined && {height: height},
+                    width != undefined && {width: width}
                 ]}>
                 <HybridImage 
                     style={[
@@ -39,8 +53,8 @@ const ThumbnailGrayView = (props) => {
                     <Text
                         style={[
                             styles.title,
-                            textColor && {color: textColor},
-                            textSize && {fontSize: textSize}
+                            textColor != undefined && {color: textColor},
+                            textSize != undefined && {fontSize: textSize}
                         ]}
                         numberOfLines={2}>
                             {title}
@@ -48,8 +62,8 @@ const ThumbnailGrayView = (props) => {
                     <Text 
                         style={[
                             styles.description,
-                            textColor && {color: textColor},
-                            textSize && {fontSize: textSize-1}
+                            textColor != undefined && {color: textColor},
+                            textSize != undefined && {fontSize: textSize-1}
                         ]} 
                         numberOfLines={3}>
                             {summary}
@@ -57,8 +71,8 @@ const ThumbnailGrayView = (props) => {
                     <Text 
                         style={[
                             styles.date,
-                            textColor && {color: textColor},
-                            textSize && {fontSize: textSize-2}
+                            textColor != undefined && {color: textColor},
+                            textSize != undefined && {fontSize: textSize-2}
                         ]} 
                         numberOfLines={1}>
                             {sinceDate}
